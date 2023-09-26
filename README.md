@@ -2,7 +2,7 @@
 
 ![](example.gif)
 
-This code simulates a 2D box full of elastically colliding spheres. Their parameters, such as mass, radius, initial position and velocity, are randomly generated (with certain constrains), but can be also be changed individually. By default, each block is colored according to its kinetic energy given by $E_\text{k} = m \|\mathbf{v} \|^2 \ / \ 2$.
+This code simulates a 2D box full of elastically colliding spheres. Their parameters, such as mass, radius, initial position and velocity, are randomly generated (with certain constrains), but can be also be changed individually. By default, each block is colored according to its kinetic energy given by $E_\text{k} = m ||\mathbf{v} ||^2 \ / \ 2$.
 
 The following settings in the `config.yaml` file can be adjusted:
 
@@ -21,11 +21,11 @@ The following settings in the `config.yaml` file can be adjusted:
 
 ## Block-block collisions
 
-It is useful to declare $\mathbf{\Delta x}:= \mathbf{x}_1-\mathbf{x}_2, \ \mathbf{\Delta v}:= \mathbf{v}_1-\mathbf{v}_2$ and $\mathbf{\widehat{\Delta x}}:= \mathbf{\Delta x} \ / \ \|\mathbf{\Delta x}\|$ (which is just the unit vector along $\mathbf{\Delta x}$). 
+It is useful to declare $\mathbf{\Delta x}:= \mathbf{x}_1-\mathbf{x}_2, \ \mathbf{\Delta v}:= \mathbf{v}_1-\mathbf{v}_2$ and $\mathbf{\widehat{\Delta x}}:= \mathbf{\Delta x} \ / \ ||\mathbf{\Delta x}||$ (which is just the unit vector along $\mathbf{\Delta x}$). 
 
 ### Detection
 
-With block radii $r_1$ and $r_2$ their overlap can be defined as $o := r_1 \ + r_2 \ - \ \|\mathbf{\Delta x}\|$. Collision happens when  $o > 0$.
+With block radii $r_1$ and $r_2$ their overlap can be defined as $o := r_1 \ + r_2 \ - \ ||\mathbf{\Delta x}||$. Collision happens when  $o > 0$.
 
 
 ### Procedure
@@ -33,9 +33,9 @@ With block radii $r_1$ and $r_2$ their overlap can be defined as $o := r_1 \ + r
 [Wikipedia provides the following solutions](https://en.wikipedia.org/wiki/Elastic_collision#Two-dimensional_collision_with_two_moving_objects) to an arbitrary 2D elastic collision:
 
 $$\begin{align}
-\mathbf{v}'_1 &= \mathbf{v}_1-\frac{2 m_2}{m_1+m_2} \ \frac{\langle \mathbf{v}_1-\mathbf{v}_2,\,\mathbf{x}_1-\mathbf{x}_2\rangle}{\|\mathbf{x}_1-\mathbf{x}_2\|^2} \ (\mathbf{x}_1-\mathbf{x}_2),
+\mathbf{v}'_1 &= \mathbf{v}_1-\frac{2 m_2}{m_1+m_2} \ \frac{\langle \mathbf{v}_1-\mathbf{v}_2, \ \mathbf{x}_1-\mathbf{x}_2\rangle}{||\mathbf{x}_1-\mathbf{x}_2||^2} \ (\mathbf{x}_1-\mathbf{x}_2),
 \\
-\mathbf{v}'_2 &= \mathbf{v}_2-\frac{2 m_1}{m_1+m_2} \ \frac{\langle \mathbf{v}_2-\mathbf{v}_1,\,\mathbf{x}_2-\mathbf{x}_1\rangle}{\|\mathbf{x}_2-\mathbf{x}_1\|^2} \ (\mathbf{x}_2-\mathbf{x}_1)
+\mathbf{v}'_2 &= \mathbf{v}_2-\frac{2 m_1}{m_1+m_2} \ \frac{\langle \mathbf{v}_2-\mathbf{v}_1, \ \mathbf{x}_2-\mathbf{x}_1\rangle}{||\mathbf{x}_2-\mathbf{x}_1||^2} \ (\mathbf{x}_2-\mathbf{x}_1)
 \end{align}
 $$
 
@@ -55,9 +55,9 @@ where the common factor $c = 2 \ \mathbf{\widehat{\Delta x}} \ \langle \mathbf{\
 After the collision, to prevent block sticking together for multiple frames, their positions are adjusted so they are barely touching. Each block is moved by half of their overlap alongside the unit vector joining their centres:
 
 $$\begin{align}
-\mathbf{x}'_1 &= \mathbf{x}_1 + o \ \|\mathbf{\Delta x}\| \ / \ 2, 
+\mathbf{x}'_1 &= \mathbf{x}_1 + o \ ||\mathbf{\Delta x}|| \ / \ 2, 
 \\
-\mathbf{x}'_2 &= \mathbf{x}_2 - o \ \|\mathbf{\Delta x}\| \ / \ 2.
+\mathbf{x}'_2 &= \mathbf{x}_2 - o \ ||\mathbf{\Delta x}|| \ / \ 2.
 \end{align}
 $$
 

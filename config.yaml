@@ -1,0 +1,13 @@
+# Canvas settings
+canvas_size: 20
+n_blocks: 50
+
+# Block settings
+mass_limits: [1, 5]
+radius_limits: [0.1, 1]
+velocity_limit: 0.1
+
+# Animation settings
+frames: 300
+fps: 30
+dpi: 300
